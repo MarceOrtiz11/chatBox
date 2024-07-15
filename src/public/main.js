@@ -13,10 +13,10 @@ Swal.fire({
         return !value && 'ingresa un nick'
     }
 }).then((result) => {
-    console.log(result.value)
     user = result.value
     title.innerText = 'Bienvenido al chat ' + user
-    socket.emit('newUser', { user });
+    socket.emit('nuevoUsuario', { user });
+
 })
 
 
@@ -35,7 +35,7 @@ socket.on('conversacion', (data) => {
         const div = document.createElement('div');
         const nombre = document.createElement('p');
         const mensaje = document.createElement('p');
-        nombre.innerText = chat.user + ': ';
+        nombre.innerText = chat.user === user ? 'Yo: ' : chat.user + ': ';
         mensaje.innerText = chat.mensaje;
         div.appendChild(nombre);
         div.appendChild(mensaje);

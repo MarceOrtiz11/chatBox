@@ -19,13 +19,17 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer);
 const conversacion = [];
+const usuarios = [];
 
 io.on('connection', (socket) => {
-    console.log('Nueva Conexion')
 
     socket.on('mensaje', (data) => {
         conversacion.push(data);
-        console.log(data)
         io.emit('conversacion', conversacion);
     })
+
+    socket.on('nuevoUsuario', (usuario) => {
+        socket.emit('conversacion', conversacion);
+    })
+
 })
