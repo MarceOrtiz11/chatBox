@@ -42,3 +42,17 @@ socket.on('conversacion', (data) => {
         contenedorChat.appendChild(div);
     })
 })
+
+socket.on('conectados', (listaUsuarios) => {
+    const conectadosContainer = document.querySelector('#conectados');
+    conectadosContainer.innerHTML = '';
+    listaUsuarios.forEach(usuario => {
+        const li = document.createElement('li');
+        li.innerText = usuario.user === user ? user + ' - (Yo)' : usuario.user;
+        conectadosContainer.appendChild(li);
+    })
+})
+
+// window.addEventListener('beforeunload', () => {
+//     socket.emit('disconect', {user})
+// })
